@@ -7,14 +7,14 @@ def delete_member():
         student_seq = int(input("삭제할 성적의 고유 ID(id_grade) 입력:" ))
 
         cursor.execute("SELECT seq, subject FROM student WHERE seq = %s", (student_seq,))
-        result = cursor.fetchone()
+        rows = cursor.fetchone()
 
-        if not result:
+        if not rows:
             print("해당 학생이 없습니다.")
             return
-        
 
-        subject = result[1]
+
+        subject = rows[1]
         
         delete_message = str(input("정말로 삭제 하시겠습니까? (y/n): "))
 
