@@ -8,14 +8,14 @@ def insert_member():
 
         student_seq = int(input("- 학생 번호(seq) 입력:  "))
         cursor.execute("SELECT name, id FROM student WHERE seq = %s", (student_seq,))
-        result = cursor.fetchone()
+        rows = cursor.fetchone()
 
-        if not result:
+        if not rows:
             print("해당 학생이 없습니다.")
             return
         
-        name = result[0]
-        user_id = result[1] 
+        name = rows[0]
+        user_id = rows[1] 
         
 
         subject_input = input("- 과목명 입력:")

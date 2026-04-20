@@ -7,14 +7,14 @@ def update_member():
         student_seq = int(input("수정할 성적의 고유 ID(id_grade) 입력:" ))
 
         cursor.execute("SELECT subject, score FROM student WHERE seq = %s", (student_seq,))
-        result = cursor.fetchone()
+        rows = cursor.fetchone()
 
-        if not result:
+        if not rows:
             print("해당 학생이 없습니다.")
             return
         
-        subject = result[0]
-        score = result[1]
+        subject = rows[0]
+        score = rows[1]
 
         print(f"--- 현재 정보 : {subject} ({score}점) ---")
 

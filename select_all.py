@@ -8,6 +8,10 @@ def select_all():
         cursor.execute(sql)
         rows = cursor.fetchall()
 
+        if not rows:
+            print("해당 학생이 없습니다.")
+            return
+
         print("\n--- [ 성적 전체 목록 ] ---")
         print("번호 | 이름(ID)    | 과목명            | 점수 | 학기   | 등록일")
         print("-----------------------------------------------------------")
