@@ -6,7 +6,7 @@ def update_member():
     try:
         student_seq = int(input("수정할 성적의 고유 ID(id_grade) 입력:" ))
 
-        cursor.execute("SELECT subject, score FROM student WHERE seq = %s", (student_seq,))
+        cursor.execute("SELECT subject, score FROM grades WHERE id_grade = %s", (student_seq,))
         rows = cursor.fetchone()
 
         if not rows:
@@ -20,7 +20,7 @@ def update_member():
 
         update_score = int(input("수정할 점수 입력: "))
         
-        sql = "UPDATE student SET score = %s WHERE seq = %s"
+        sql = "UPDATE grades SET score = %s WHERE id_grade = %s"
         cursor.execute(sql, (update_score, student_seq))
         conn.commit()
 

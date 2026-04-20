@@ -7,7 +7,7 @@ def insert_member():
         print("--- [ 성적 데이터 추가] ---")
 
         student_seq = int(input("- 학생 번호(seq) 입력:  "))
-        cursor.execute("SELECT name, id FROM student WHERE seq = %s", (student_seq,))
+        cursor.execute("SELECT name, id FROM member WHERE seq = %s", (student_seq,))
         rows = cursor.fetchone()
 
         if not rows:
@@ -20,14 +20,13 @@ def insert_member():
 
         subject_input = input("- 과목명 입력:")
         score_input = int(input("- 점수 입력: "))
-        semester_input = input("- 학기 입력(예: 2026-1):")
+        term_input = input("- 학기 입력(예: 2026-1):")
 
-        sql = """INSERT INTO student (name, id, subject, score, semester, regdate) VALUES (%s, %s, %s, %s, %s, NOW())"""
+        sql = """INSERT INTO grades (member_seq, subject, score, term, reg_date) VALUES (%s, %s, %s, %s, NOW())"""
                 
-        # 3. 쿼리 실행
-        cursor.execute(sql, (name, user_id, subject_input, score_input, semester_input))
+
+        cursor.execute(sql, ( student_seq, subject_input, score_input, term_input))
         
-        # 4. 데이터베이스 반영 (INSERT/UPDATE/DELETE 작업 시 필수!)
         conn.commit()
         
         print(f"[시스템] {name} 학생의 {subject_input} 성적이 성공적으로 등록되었습니다.")

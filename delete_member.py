@@ -6,11 +6,11 @@ def delete_member():
     try:
         student_seq = int(input("삭제할 성적의 고유 ID(id_grade) 입력:" ))
 
-        cursor.execute("SELECT seq, subject FROM student WHERE seq = %s", (student_seq,))
+        cursor.execute("SELECT id_grade, subject FROM grades WHERE id_grade = %s", (student_seq,))
         rows = cursor.fetchone()
 
         if not rows:
-            print("해당 학생이 없습니다.")
+            print("해당 성적 데이터가 없습니다.")
             return
 
 
@@ -20,7 +20,7 @@ def delete_member():
 
         if delete_message == 'y':
 
-            sql = """DELETE FROM student WHERE seq =  %s """
+            sql = """DELETE FROM grades WHERE id_grade =  %s """
         
             cursor.execute(sql, (student_seq,))
             conn.commit()

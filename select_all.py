@@ -4,7 +4,8 @@ def select_all():
     conn, cursor = get_cursor()
     
     try:
-        sql = "SELECT seq, name, id, subject, score, semester, regdate FROM student"
+        sql = "SELECT id_grade, m.id, m.name, subject, score, term, reg_date FROM grades g " \
+        "JOIN member m ON g.member_seq = m.seq;"
         cursor.execute(sql)
         rows = cursor.fetchall()
 
@@ -17,16 +18,16 @@ def select_all():
         print("-----------------------------------------------------------")
 
         for row in rows:
-            seq = row[0]
-            name = row[1]
-            user_id = row[2]
+            id_grade = row[0]
+            user_id = row[1]
+            name = row[2]
             subject = row[3]
             score = row[4]
-            semester = row[5]
-            regdate = row[6]
+            term = row[5]
+            reg_date = row[6]
 
             # 포맷 맞춰 출력
-            print(f"{seq:<4} | {name}({user_id}) | {subject:<15} | {score:<4} | {semester:<6} | {regdate}")
+            print(f"{id_grade:<4} | {name}({user_id}) | {subject:<15} | {score:<4} | {term:<6} | {reg_date}")
 
         print("-----------------------------------------------------------")
 
